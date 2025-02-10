@@ -1,0 +1,54 @@
+{% load static %}
+<header>
+    <div class="px-3 py-2 text-bg-dark">
+      <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+          <a href="{% url 'home' %}" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+            <img width="64" src="{% static 'img/icon.png' %}"/>
+          </a>
+          <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+            <li>
+              <a href="{% url 'home' %}" class="nav-link text-secondary">
+                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#home"></use></svg>
+                Home
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'admin:index' %}" class="nav-link text-white">
+                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#speedometer2"></use></svg>
+                Админка
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'system:feedback' %}" class="nav-link text-white">
+                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#table"></use></svg>
+                Обратная связь
+              </a>
+            </li>
+            <li>
+              <a href="#" class="nav-link text-white">
+                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#people-circle"></use></svg>
+                Customers
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="px-3 py-2 border-bottom mb-3">
+      <div class="container d-flex flex-wrap justify-content-center">
+        <form class="col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto" role="search">
+          <input type="search" class="form-control" placeholder="Поиск..." aria-label="Search">
+        </form>
+        <div class="text-end">
+          {% if user.is_authenticated %}
+            <a class="btn btn-success" href="{% url 'system:profile_detail' slug=user.profile.slug %}" role="button">{{user.username}}</a>
+            <form style="display:inline-block" method="post" action="{% url 'system:logout' %}">{% csrf_token %}<button class="btn btn-danger" type="submit">Выход</button></form>
+          {% else %}
+            <a class="btn btn-light text-dark me-2" href="{% url 'system:login' %}" role="button">Войти</a>
+            <a class="btn btn-primary" href="{% url 'system:register' %}" role="button">Регистрация</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </header>
