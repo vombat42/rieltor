@@ -71,15 +71,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'rieltor.wsgi.application'
 
-# Database
-# https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-# my_pg_connect import from secret.py
+
 DATABASES = {
     "default": my_pg_connect
 }
@@ -146,9 +138,8 @@ EMAIL_ADMIN = EMAIL_HOST_USER
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# LOGIN_REDIRECT_URL = 'users:profile'
+
 LOGOUT_REDIRECT_URL = 'home'
-# LOGOUT_REDIRECT_URL = 'admin'
 LOGIN_URL = 'system:login'
 
 # AUTH_USER_MODEL = 'users.User'
@@ -164,3 +155,5 @@ CAPTCHA_LENGTH = 5
 AUTHENTICATION_BACKENDS = [
     'modules.system.backends.UserModelBackend' # переопределение аутентификации (добавление по email)
 ]
+
+CSRF_TRUSTED_ORIGINS = my_csrf_trusted_origins
